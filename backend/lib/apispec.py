@@ -4,10 +4,7 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
 
 
-TAGS = (
-    {"name": "auth", "description": "Ендпоінти для аутентифікації"},
-    {"name": "lots", "description": "Ендпоінти лотів аукіону"},
-)
+TAGS = ({"name": "auth", "description": "Ендпоінти для аутентифікації"},)
 EXCLUDED_ENDPOINTS = {
     "static",
     "swagger",

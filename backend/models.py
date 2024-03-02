@@ -1,4 +1,11 @@
+from enum import Enum
+
 from backend.services.db import db
+
+
+class Role(Enum):
+    STUDENT = 1
+    TEACHER = 2
 
 
 class User(db.Model):
@@ -9,6 +16,7 @@ class User(db.Model):
     first_name = db.Column(db.String(128))
     last_name = db.Column(db.String(128))
     password = db.Column(db.String(256))
+    role = db.Column(db.Enum(Role), nullable=False, default=Role.STUDENT)
 
 
 class TokenBlocklist(db.Model):
