@@ -10,4 +10,5 @@ class UserAlreadyExist(Exception):
     pass
 
 
-
+class GroupDoesNotExist(Exception):
+    pass

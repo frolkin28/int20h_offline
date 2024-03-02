@@ -25,6 +25,7 @@ class User(db.Model):
     last_name = db.Column(db.String(128))
     password = db.Column(db.String(256))
     role = db.Column(db.Enum(Role), nullable=False, default=Role.STUDENT)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"))
 
 
 class TokenBlocklist(db.Model):
@@ -39,7 +40,7 @@ class Group(db.Model):
     tablename = "group"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
+    name = db.Column(db.String(64), unique=True, nullable=False)
 
 
 class Subject(db.Model):

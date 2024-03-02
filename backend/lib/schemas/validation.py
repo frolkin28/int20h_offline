@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, validate
+from marshmallow import Schema, fields
 
 from backend.models import Role, Active_type
 
@@ -9,6 +9,7 @@ class SignUpSchema(Schema):
     email = fields.Email(required=True)
     password = fields.Str(required=True)
     role = fields.Enum(Role, by_value=True, required=True)
+    group = fields.Str(description="Required for student")
 
 
 class SignInSchema(Schema):
@@ -36,7 +37,8 @@ class CreateSubjectSchema(Schema):
 
 class CreateGroupSchema(Schema):
     name = fields.Str(required=True)
-    
+
+
 class SubjectGroupShcema(Schema):
     subject_id = fields.Int(required=True)
     subject_name = fields.Str(required=True)

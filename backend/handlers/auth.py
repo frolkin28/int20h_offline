@@ -4,7 +4,7 @@ from flask import Blueprint, request, current_app
 from marshmallow import ValidationError
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt
 
-from backend.exc import UserAlreadyExist
+from backend.exc import UserAlreadyExist, GroupDoesNotExist
 from backend.lib.schemas import SignUpSchema, SignInSchema
 from backend.types import SignInPayload, SignUpPayload
 from backend.lib.auth import (
@@ -61,6 +61,10 @@ def sign_up():
         current_app.logger.warning(f"User({request_data['email']}) already exists")
         return error_response(
             status_code=409, errors={"message": "User already exists"}
+        )
+    except GroupDoesNotExist:
+        return error_response(
+            status_code=409, errors={"message": "This group does not exist"}
         )
 
     access_token = create_access_token(identity=user)

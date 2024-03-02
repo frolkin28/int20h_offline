@@ -7,6 +7,7 @@ class SignUpPayload(t.TypedDict):
     email: str
     password: str
     role: int
+    group: t.NotRequired[str]
 
 
 class SignInPayload(t.TypedDict):
@@ -18,4 +19,3 @@ class CreateSubjectPayload(t.TypedDict):
     name: str
     group_id: int
     activities: t.List[dict]
-
