@@ -11,3 +11,7 @@ def create_students_group(name: str) -> bool:
     except IntegrityError:
         return False
     return True
+
+
+def get_groups() -> list[Group]:
+    return Group.query.all()
