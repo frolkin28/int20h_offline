@@ -11,6 +11,7 @@ from backend.handlers import (
     group,
     user,
     activity,
+    student,
 )
 from backend.config import get_config
 from backend.services.db import db, migrate
@@ -29,6 +30,7 @@ def create_app() -> Flask:
     app.register_blueprint(group.bp)
     app.register_blueprint(user.bp)
     app.register_blueprint(activity.bp)
+    app.register_blueprint(student.bp)
 
     db.init_app(app)
     migrate.init_app(app, db)

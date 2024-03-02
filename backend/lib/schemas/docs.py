@@ -114,3 +114,14 @@ class GroupSchema(Schema):
 
 class GroupsListResponse(ResponseSchema):
     data = fields.List(fields.Nested(GroupSchema))
+
+
+class StudentSchema(Schema):
+    id = fields.Int(required=True)
+    first_name = fields.Str(required=False)
+    last_name = fields.Str(required=False)
+    email = fields.Str(required=False)
+
+
+class StudentsListResponse(ResponseSchema):
+    data = fields.List(fields.Nested(StudentSchema))
