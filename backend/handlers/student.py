@@ -24,8 +24,6 @@ def students_list():
                 content:
                     application/json:
                         schema: AccountResponse
-            '401':
-                description: Користувач не авторизований
         tags:
         - students
     """
