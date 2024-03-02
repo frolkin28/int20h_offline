@@ -16,6 +16,7 @@ from backend.lib.schemas import (
     UpsertSubjectSuccessResponse,
     UpsertSubjectErrorResponse,
     AccountResponse,
+    SubjectGroupShcema,
 )
 
 
@@ -72,7 +73,10 @@ def get_apispec(app: Flask) -> APISpec:
         "UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse
     )
     spec.components.schema("AccountResponse", schema=AccountResponse)
-
+    spec.components.schema("UpsertSubjectSuccessResponse", schema=UpsertSubjectSuccessResponse)
+    spec.components.schema("UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse)
+    spec.components.schema("SubjectGroupShcema", schema=SubjectGroupShcema)
+    
     create_tags(spec)
 
     load_docstrings(spec, app)

@@ -32,7 +32,7 @@ def create_activities( activities_data: list, subject_id: int) -> None:
     db.session.commit()
 
 
-def create_subject(payload: CreateSubjectPayload, user_id : int,)-> int:
+def create_subject(payload: CreateSubjectPayload, user_id : int)-> int:
 
 
     subject = Subject(
@@ -47,3 +47,24 @@ def create_subject(payload: CreateSubjectPayload, user_id : int,)-> int:
         create_activities(payload["activities"], subject.id)
 
     return subject.id
+
+
+def take_subject_list(user_id: int) -> list:
+    
+    subjects = Subject.query\
+        .join(Group, Subject.group_id == Group.id)\
+        .filter(Subject.teacher_id == user_id)\
+        .options(joinedload(Subject.group))\
+        .all()
+    
+    data = []
+    
+    for subject in subjects:
+        test_dict = {
+            "subject_id": subject.id,
+            "subject_name": subject.name,
+            "group_name": subject.group.name
+        }
+        data.append(test_dict)
+
+    return data

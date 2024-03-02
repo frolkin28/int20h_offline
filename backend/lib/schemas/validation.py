@@ -36,3 +36,8 @@ class CreateSubjectSchema(Schema):
 
 class CreateGroupSchema(Schema):
     name = fields.Str(required=True)
+    
+class SubjectGroupShcema(Schema):
+    subject_id = fields.Int(required=True)
+    subject_name = fields.Str(required=True)
+    group_name = fields.Str(required=True)
