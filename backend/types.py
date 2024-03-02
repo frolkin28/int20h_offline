@@ -6,6 +6,7 @@ class SignUpPayload(t.TypedDict):
     last_name: str
     email: str
     password: str
+    role: int
 
 
 class SignInPayload(t.TypedDict):
