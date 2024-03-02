@@ -16,11 +16,12 @@ from backend.exc import (
     UserAlreadyExist,
     UserDoesNotExist,
     AuthenticationError,
+    GroupDoesNotExist,
 )
-from backend.models import TokenBlocklist, User
+from backend.models import TokenBlocklist, User, Role
 from backend.types import SignUpPayload
 from backend.services.db import db
-from backend.models import User, Role
+from backend.models import User, Role, Group
 from backend.utils import error_response
 
 
@@ -62,12 +63,27 @@ def check_if_token_revoked(_, jwt_payload: dict) -> bool:
 
 
 def create_user(payload: SignUpPayload) -> User:
+    group_name = payload.get("group")
+    group_id = None
+
+    if payload["role"] == Role.STUDENT:
+        group_id = (
+            db.session.query(Group.id)
+            .filter(
+                Group.name == group_name,
+            )
+            .scalar()
+        )
+        if group_id is None:
+            raise GroupDoesNotExist
+
     user = User(
         email=payload["email"],
         first_name=payload["first_name"],
         last_name=payload["last_name"],
         password=generate_password_hash(payload["password"]),
         role=payload["role"],
+        group_id=group_id,
     )
     db.session.add(user)
     try:
