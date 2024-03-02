@@ -18,13 +18,13 @@ export const TextInput = (props: TextInputProps) => {
   }
 
   return (
-    <input 
+    <input
       id={id}
       type={type}
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
-      className={styles["form-input"]}
+      className={styles['form-input']}
     />
   )
 }
