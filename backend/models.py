@@ -39,7 +39,7 @@ class Group(db.Model):
     tablename = "group"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
+    name = db.Column(db.String(64), unique=True)
 
 
 class Subject(db.Model):
