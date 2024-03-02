@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { SignInForm, SignUpForm } from "../../components"
 import styles from "./Home.module.css"
+import { Welcome } from '../../components/Welcome/Welcome'
+
 
 enum PageMode {
     SignIn = "SignIn",
@@ -16,7 +18,7 @@ export const HomePage = () => {
         setPageMode((prevState) => prevState === PageMode.SignUp ? PageMode.SignIn : PageMode.SignUp)
     }
 
-    let content = <h1>Welcome</h1>
+    let content = <Welcome/>;
     let switchText = ""
     if (pageMode === PageMode.SignIn) {
         content = <SignInForm />
@@ -25,10 +27,9 @@ export const HomePage = () => {
         content = <SignUpForm />
         switchText = "У мене вже є профіль"
     }
-
     return (
       <div className={styles.container}>
-          {content}
+        {content} 
           <a href="#" onClick={handleSwitchPageMode}>{switchText}</a>
       </div>
     )
