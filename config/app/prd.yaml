@@ -1,4 +1,1 @@
 debug: false
-
-jwt_access_token_expires: 60
-aws_s3_domain: dq5d23gxa9vto.cloudfront.net
