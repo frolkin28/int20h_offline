@@ -19,6 +19,7 @@ from backend.lib.schemas import (
     SubjectGroupShcema,
     SubjectActivitesShcema,
     UserUpdateSchema,
+    ActivityResponse,
 )
 
 
@@ -27,6 +28,7 @@ TAGS = (
     {"name": "group", "description": "Ендпоінти для маніпуляцій з групами"},
     {"name": "journal", "description": "Ендпоінти функціоналу університета"},
     {"name": "users", "description": "Ендпоінти користувачів"},
+    {"name": "activity", "description": "Ендпоінти активностей"},
 )
 
 
@@ -75,12 +77,12 @@ def get_apispec(app: Flask) -> APISpec:
         "UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse
     )
     spec.components.schema("AccountResponse", schema=AccountResponse)
-    spec.components.schema("UpsertSubjectSuccessResponse", schema=UpsertSubjectSuccessResponse)
-    spec.components.schema("UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse)
     spec.components.schema("SubjectGroupShcema", schema=SubjectGroupShcema)
     spec.components.schema("SubjectActivitesShcema", schema=SubjectActivitesShcema)
     spec.components.schema("UserUpdateSchema", schema=UserUpdateSchema)
     
+    spec.components.schema("ActivityResponse", schema=ActivityResponse)
+
     create_tags(spec)
 
     load_docstrings(spec, app)

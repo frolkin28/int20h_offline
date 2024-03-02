@@ -67,3 +67,41 @@ class UserSchema(Schema):
 
 class AccountResponse(ResponseSchema):
     data = fields.Nested(UserSchema)
+
+
+class ActivitySchema(Schema):
+    id = fields.Int(required=True)
+
+
+class StuduntAttendanceSchema(Schema):
+    id = fields.Int(required=True)
+    first_name = fields.Str(required=True)
+    last_name = fields.Str(required=True)
+
+
+class MarkSchema(Schema):
+    id = fields.Int(required=True)
+    mark = fields.Str()
+
+
+class AttendanceSchema(Schema):
+    student = fields.Nested(StuduntAttendanceSchema)
+    attendance = fields.Nested(MarkSchema)
+
+
+class SubjectActivitySchema(Schema):
+    id = fields.Int(required=True)
+    name = fields.Str(required=True)
+
+
+class ActivitySchema(Schema):
+    id = fields.Int(required=True)
+    date = fields.Str(required=True)
+    type = fields.Str(required=True)
+    task_link = fields.Str(required=False)
+    subject = fields.Nested(SubjectActivitySchema)
+    attendance = fields.List(fields.Nested(AttendanceSchema))
+
+
+class ActivityResponse(ResponseSchema):
+    data = fields.Nested(ActivitySchema)
