@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 
-from backend.models import Role
+from backend.models import Role, Active_type
 
 
 class SignUpSchema(Schema):
@@ -14,3 +14,25 @@ class SignUpSchema(Schema):
 class SignInSchema(Schema):
     email = fields.Email(required=True)
     password = fields.Str(required=True)
+
+
+class FullSubjectSchema(Schema):
+    name = fields.Str(required=True)
+    teacher_id = fields.Int(required=True)
+    group_id = fields.Int(required=True)
+
+
+class ActivitySchema(Schema):
+    type = fields.Enum(Active_type, by_value=True, required=True)
+    task_link = fields.Str()
+    date = fields.DateTime(required=True)
+
+
+class CreateSubjectSchema(Schema):
+    name = fields.Str(required=True)
+    group_id = fields.Int(required=True)
+    activities = fields.List(fields.Nested(ActivitySchema))
+
+
+
+
