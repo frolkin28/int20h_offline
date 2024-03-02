@@ -15,6 +15,7 @@ from backend.lib.schemas import (
     ActivitySchema,
     UpsertSubjectSuccessResponse,
     UpsertSubjectErrorResponse,
+    AccountResponse,
 )
 
 
@@ -22,6 +23,7 @@ TAGS = (
     {"name": "auth", "description": "Ендпоінти для аутентифікації"},
     {"name": "group", "description": "Ендпоінти для маніпуляцій з групами"},
     {"name": "journal", "description": "Ендпоінти функціоналу університета"},
+    {"name": "users", "description": "Ендпоінти користувачів"},
 )
 
 
@@ -69,6 +71,7 @@ def get_apispec(app: Flask) -> APISpec:
     spec.components.schema(
         "UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse
     )
+    spec.components.schema("AccountResponse", schema=AccountResponse)
 
     create_tags(spec)
 
