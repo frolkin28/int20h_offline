@@ -60,11 +60,27 @@ def take_subject_list(user_id: int) -> list:
     data = []
     
     for subject in subjects:
-        test_dict = {
+        subject_dict = {
             "subject_id": subject.id,
             "subject_name": subject.name,
             "group_name": subject.group.name
         }
-        data.append(test_dict)
+        data.append(subject)
 
     return data
+
+
+def get_activites(subject_id: int) -> list:
+    
+    data = []
+    activites = Activity.query.filter(Activity.subject_id == subject_id).all()
+
+    for active in activites:
+        active_dict = {
+            "active_id": active.id,
+            "type": active.active,
+            "date": active.date
+        }
+        data.append(active_dict) 
+    return(data)
+

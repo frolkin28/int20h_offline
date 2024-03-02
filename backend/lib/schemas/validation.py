@@ -43,3 +43,9 @@ class SubjectGroupShcema(Schema):
     subject_id = fields.Int(required=True)
     subject_name = fields.Str(required=True)
     group_name = fields.Str(required=True)
+
+
+class SubjectActivitesShcema(Schema):
+    active_id = fields.Int(required=True)
+    type = fields.Str(required=True)
+    date = fields.DateTime(required=True)
