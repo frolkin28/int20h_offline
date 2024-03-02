@@ -1,27 +1,17 @@
 from typing import cast
-from backend.lib.auth import get_user_id_or_none, permissions
+from backend.lib.auth import permissions
 from backend.utils import error_response, success_response
 
 from flask import Blueprint, request
 from marshmallow import ValidationError
-from flask_jwt_extended import jwt_required, current_user
+from flask_jwt_extended import current_user
 
-from backend.lib.schemas import (
-    CreateSubjectSchema,
-    FullSubjectSchema,
-    ActivitySchema,
-)
+from backend.lib.schemas import CreateSubjectSchema
 
-from models import User, Role
+from backend.models import User, Role
 from backend.types import CreateSubjectPayload
 
 from backend.lib.journal import create_subject
-# from backend.exc import ( exceptions import 
-#     InvalidDateError,
-#     LotDoesNotExist,
-#     LotEndedError,
-#     UserPermissionError,
-# )
 
 
 bp = Blueprint("journal", __name__, url_prefix="/api/journal")
@@ -46,7 +36,7 @@ def add_subject(user: User):
                             group_id:
                                 type: integer
                             activities:
-                                type: list    
+                                type: list
         responses:
             '200':
                 content:
@@ -70,15 +60,13 @@ def add_subject(user: User):
                 {
                     "name": request.form.get("name"),
                     "group_id": request.form.get("group_id"),
-                    "activities": request.form.get("activities"), 
-
+                    "activities": request.form.get("activities"),
                 }
             ),
         )
     except ValidationError as e:
         return error_response(status_code=400, errors=e.messages)
-    
+
     subject_id = create_subject(request_data, user_id)
 
     return success_response(data={"subject_id": subject_id})
-
