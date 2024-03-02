@@ -19,3 +19,8 @@ class CreateSubjectPayload(t.TypedDict):
     name: str
     group_id: int
     activities: t.List[dict]
+
+
+class UpdateUserload(t.TypedDict):
+    first_name: str
+    last_name: str

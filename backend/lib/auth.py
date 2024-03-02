@@ -23,6 +23,7 @@ from backend.types import SignUpPayload
 from backend.services.db import db
 from backend.models import User, Role, Group
 from backend.utils import error_response
+from backend.types import  UpdateUserload
 
 
 jwt = JWTManager()
@@ -158,3 +159,19 @@ def permissions(roles: list[Role]):
         return wrapper
 
     return decorator
+
+
+def update_user_data(payload: UpdateUserload, user_id: int):
+    
+    edit_user = User.query.get(user_id)
+
+    edit_user.first_name = payload["first_name"]
+    edit_user.last_name = payload["last_name"]
+
+    db.session.commit()
+
+    return edit_user.id
+    
+
+
+
