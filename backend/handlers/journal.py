@@ -11,7 +11,8 @@ from backend.lib.schemas import CreateSubjectSchema
 from backend.models import User, Role
 from backend.types import CreateSubjectPayload
 
-from backend.lib.journal import create_subject
+from backend.lib.journal import create_subject, take_subject_list, get_activites
+
 
 
 bp = Blueprint("journal", __name__, url_prefix="/api/journal")
@@ -70,3 +71,65 @@ def add_subject(user: User):
     subject_id = create_subject(request_data, user_id)
 
     return success_response(data={"subject_id": subject_id})
+
+
+@bp.route("/", methods=("GET",))
+@permissions([Role.TEACHER])
+def my_subjects(user: User):
+    """
+    ---
+    get:
+        summary: Список предметів викладача
+        responses:
+            '200':
+                content:
+                    application/json:
+                        schema: SubjectGroupShcema
+            '400':
+                content:
+                    application/json:
+                        schema: UpsertSubjectErrorResponse
+            '401':
+                description: Користувач не авторизований
+        tags:
+        - journal
+    """
+    user_id: int = current_user.id
+
+    try:
+        subjects_list = take_subject_list(user_id)
+    except ValidationError as e:
+        return error_response(status_code=400, errors=e.messages)
+
+    return success_response(data={"subject_list": subjects_list})
+
+
+
+# FOR ALL ROLES
+@bp.route("/<int:id>", methods=("GET",))
+def subject_activity(id):
+    """
+    ---
+    get:
+        summary: Список завдань по конкретному предмету  
+        responses: 
+            '200':
+                content:
+                    application/json:
+                        schema: SubjectActivitesShcema
+            '400':
+                content:
+                    application/json:
+                        schema: UpsertSubjectErrorResponse
+            '401':
+                description: Користувач не авторизований
+        tags:
+        - journal
+    """
+
+    try:
+        activites_list = get_activites(id)
+    except ValidationError as e:
+        return error_response(status_code=400, errors=e.messages)
+
+    return success_response(data={"activites_list": activites_list})

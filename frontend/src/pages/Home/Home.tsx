@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { SignInForm, SignUpForm } from '../../components'
+import { SignInForm, SignUpForm, Welcome } from '../../components'
 import { AuthContext } from '../../AuthContext'
 import styles from './Home.module.css'
 
@@ -10,7 +10,7 @@ enum PageMode {
 }
 
 export const HomePage = () => {
-  const { isSignedIn } = useContext(AuthContext)
+  const { isSignedIn, user } = useContext(AuthContext)
 
   const [pageMode, setPageMode] = useState<PageMode>(PageMode.SignIn)
 
@@ -26,7 +26,9 @@ export const HomePage = () => {
     )
   }
 
-  let content = <h1>Welcome</h1>
+  let content = (
+    <Welcome firstName={user?.first_name} lastName={user?.last_name} />
+  )
   let switchText = ''
   if (pageMode === PageMode.SignIn) {
     content = <SignInForm />

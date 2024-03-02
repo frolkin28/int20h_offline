@@ -4,6 +4,8 @@ from backend.lib.schemas.validation import (
     CreateSubjectSchema,
     FullSubjectSchema,
     ActivitySchema,
+    SubjectGroupShcema,
+    SubjectActivitesShcema,
 )
 
 from backend.lib.schemas.docs import (

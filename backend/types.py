@@ -7,6 +7,7 @@ class SignUpPayload(t.TypedDict):
     email: str
     password: str
     role: int
+    group: t.NotRequired[str]
 
 
 class SignInPayload(t.TypedDict):
