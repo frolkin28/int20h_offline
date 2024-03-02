@@ -4,10 +4,10 @@ import { useAuth } from './hooks'
 import { router } from './Router'
 
 const App = () => {
-  const { token, isSignedIn, login, logout } = useAuth()
+  const { user, token, isSignedIn, login, logout } = useAuth()
 
   return (
-    <AuthContext.Provider value={{ token, isSignedIn, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isSignedIn, login, logout }}>
       <RouterProvider router={router} />
     </AuthContext.Provider>
   )

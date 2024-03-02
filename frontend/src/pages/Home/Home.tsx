@@ -1,33 +1,47 @@
-import { useState } from 'react'
-import { SignInForm, SignUpForm } from "../../components"
-import styles from "./Home.module.css"
+import { useContext, useEffect, useState } from 'react'
+import { SignInForm, SignUpForm } from '../../components'
+import { AuthContext } from '../../AuthContext'
+import styles from './Home.module.css'
 
 enum PageMode {
-    SignIn = "SignIn",
-    SignUp = "SignUp"
+  SignIn = 'SignIn',
+  SignUp = 'SignUp',
+  Welcome = 'Welcome',
 }
 
 export const HomePage = () => {
-    const [pageMode, setPageMode] = useState<PageMode>(PageMode.SignIn)
+  const { isSignedIn } = useContext(AuthContext)
 
-    const handleSwitchPageMode = () => {
-        setPageMode((prevState) => prevState === PageMode.SignUp ? PageMode.SignIn : PageMode.SignUp)
+  const [pageMode, setPageMode] = useState<PageMode>(PageMode.SignIn)
+
+  useEffect(() => {
+    if (isSignedIn) {
+      setPageMode(PageMode.Welcome)
     }
+  }, [isSignedIn])
 
-    let content = <h1>Welcome</h1>
-    let switchText = ""
-    if (pageMode === PageMode.SignIn) {
-        content = <SignInForm />
-        switchText = "Створити профіль"
-    } else if (pageMode === PageMode.SignUp) {
-        content = <SignUpForm />
-        switchText = "У мене вже є профіль"
-    }
-
-    return (
-      <div className={styles.container}>
-          {content}
-          <a href="#" onClick={handleSwitchPageMode}>{switchText}</a>
-      </div>
+  const handleSwitchPageMode = () => {
+    setPageMode((prevState) =>
+      prevState === PageMode.SignUp ? PageMode.SignIn : PageMode.SignUp
     )
+  }
+
+  let content = <h1>Welcome</h1>
+  let switchText = ''
+  if (pageMode === PageMode.SignIn) {
+    content = <SignInForm />
+    switchText = 'Створити профіль'
+  } else if (pageMode === PageMode.SignUp) {
+    content = <SignUpForm />
+    switchText = 'У мене вже є профіль'
+  }
+
+  return (
+    <div className={styles.container}>
+      {content}
+      <a href="#" onClick={handleSwitchPageMode}>
+        {switchText}
+      </a>
+    </div>
+  )
 }

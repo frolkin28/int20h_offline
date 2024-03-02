@@ -34,7 +34,6 @@ export const SignInForm = () => {
         }
       )
       login(res.data.data.access_token)
-      // next step
     } catch (error: any) {
       const message =
         error.response?.status === 400

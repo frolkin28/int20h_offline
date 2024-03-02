@@ -4,11 +4,7 @@ import styles from './SignInUpForm.module.css'
 import formStyles from '../Forms.module.css'
 import { Button, TextInput } from '../..'
 import { AuthContext } from '../../../AuthContext'
-
-enum UserRoles {
-  Student = 1,
-  Teacher = 2,
-}
+import { UserRole } from '../../../types'
 
 export const SignUpForm = () => {
   const { login } = useContext(AuthContext)
@@ -18,7 +14,7 @@ export const SignUpForm = () => {
   const [lastName, setLastname] = useState('')
   const [password, setPassword] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
-  const [role, setRole] = useState(UserRoles.Student)
+  const [role, setRole] = useState(UserRole.Student)
   const [isSubmitting, setSubmitting] = useState(false)
 
   const handleEmailChange = (value: string) => setEmail(value)
@@ -60,7 +56,6 @@ export const SignUpForm = () => {
         }
       )
       login(res.data.data.access_token)
-      // Next step!
     } catch (error) {
       alert('Сталася помилка')
     } finally {
@@ -113,8 +108,8 @@ export const SignUpForm = () => {
           <label>
             <input
               type="radio"
-              value={UserRoles.Student}
-              checked={role === UserRoles.Student}
+              value={UserRole.Student}
+              checked={role === UserRole.Student}
               onChange={handleRoleOptionChange}
             />
             Я студент
@@ -122,8 +117,8 @@ export const SignUpForm = () => {
           <label>
             <input
               type="radio"
-              value={UserRoles.Teacher}
-              checked={role === UserRoles.Teacher}
+              value={UserRole.Teacher}
+              checked={role === UserRole.Teacher}
               onChange={handleRoleOptionChange}
             />
             Я викладач
