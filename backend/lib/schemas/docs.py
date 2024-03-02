@@ -105,3 +105,12 @@ class ActivitySchema(Schema):
 
 class ActivityResponse(ResponseSchema):
     data = fields.Nested(ActivitySchema)
+
+
+class GroupSchema(Schema):
+    id = fields.Int(required=True)
+    name = fields.Str(required=False)
+
+
+class GroupsListResponse(ResponseSchema):
+    data = fields.List(fields.Nested(GroupSchema))
