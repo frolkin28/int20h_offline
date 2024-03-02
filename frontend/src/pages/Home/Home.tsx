@@ -8,8 +8,6 @@ enum PageMode {
 }
 
 export const HomePage = () => {
-    const isSignedIn = false
-
     const [pageMode, setPageMode] = useState<PageMode>(PageMode.SignIn)
 
     const handleSwitchPageMode = () => {
