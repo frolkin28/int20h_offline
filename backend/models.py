@@ -25,3 +25,38 @@ class TokenBlocklist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     jti = db.Column(db.String(36), nullable=False, index=True)
     created_at = db.Column(db.DateTime, nullable=False)
+
+
+class Group(db.Model):
+    tablename = "group"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+
+
+class Subject(db.Model):
+    tablename = "subject"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    teacher_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"))
+
+
+class Activity(db.Model):
+    tablename = "activity"
+
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.Integer, db.ForeignKey("subject.id"))
+    date = db.Column(db.DateTime)
+    type = db.Column(db.String)
+    task_link = db.Column(db.String)
+
+
+class Attendance(db.Model):
+    tablename = "attendance"
+
+    id = db.Column(db.Integer, primary_key=True)
+    users_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    activity_id = db.Column(db.Integer, db.ForeignKey("activity.id"))
+    mark = db.Column(db.String)
