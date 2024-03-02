@@ -7,4 +7,9 @@ load_dotenv()
 
 app = create_app()
 
-app.run(host="0.0.0.0", port="8080", debug=True)
+HOST = "0.0.0.0"
+PORT = "8080"
+
+
+app.logger.info(f"Application started on {HOST}:{PORT}")
+app.run(host=HOST, port=PORT, debug=True)

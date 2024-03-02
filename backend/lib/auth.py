@@ -11,7 +11,7 @@ from backend.exc import (
     AuthenticationError,
 )
 from backend.models import TokenBlocklist, User
-from backend.types import SignInPayload
+from backend.types import SignUpPayload
 from backend.services.db import db
 
 
@@ -52,7 +52,7 @@ def check_if_token_revoked(_, jwt_payload: dict) -> bool:
     return token is not None
 
 
-def create_user(payload: SignInPayload) -> User:
+def create_user(payload: SignUpPayload) -> User:
     user = User(
         email=payload["email"],
         first_name=payload["first_name"],

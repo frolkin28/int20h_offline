@@ -3,6 +3,15 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
 
+from backend.lib.schemas import (
+    SignUpSchema,
+    SignInSchema,
+    AuthSuccessResponse,
+    ErrorMessageResponse,
+    SignInErrorResponse,
+    SignUpErrorResponse,
+)
+
 
 TAGS = ({"name": "auth", "description": "Ендпоінти для аутентифікації"},)
 EXCLUDED_ENDPOINTS = {
@@ -32,13 +41,13 @@ def get_apispec(app: Flask) -> APISpec:
         plugins=[FlaskPlugin(), MarshmallowPlugin()],
     )
 
-    # spec.components.schema("SignUpSchema", schema=SignUpSchema)
-    # spec.components.schema("SignInSchema", schema=SignInSchema)
+    spec.components.schema("SignUpSchema", schema=SignUpSchema)
+    spec.components.schema("SignInSchema", schema=SignInSchema)
 
-    # spec.components.schema("AuthSuccessResponse", schema=AuthSuccessResponse)
-    # spec.components.schema("ErrorMessageResponse", schema=ErrorMessageResponse)
-    # spec.components.schema("SignInErrorResponse", schema=SignInErrorResponse)
-    # spec.components.schema("SignUpErrorResponse", schema=SignUpErrorResponse)
+    spec.components.schema("AuthSuccessResponse", schema=AuthSuccessResponse)
+    spec.components.schema("ErrorMessageResponse", schema=ErrorMessageResponse)
+    spec.components.schema("SignInErrorResponse", schema=SignInErrorResponse)
+    spec.components.schema("SignUpErrorResponse", schema=SignUpErrorResponse)
 
     create_tags(spec)
 
