@@ -3,7 +3,15 @@ import json
 from flask import Flask
 from flask_cors import CORS
 
-from backend.handlers import health, auth, swagger, journal, group, user
+from backend.handlers import (
+    health,
+    auth,
+    swagger,
+    journal,
+    group,
+    user,
+    activity,
+)
 from backend.config import get_config
 from backend.services.db import db, migrate
 from backend.lib.auth import jwt
@@ -20,6 +28,7 @@ def create_app() -> Flask:
     app.register_blueprint(journal.bp)
     app.register_blueprint(group.bp)
     app.register_blueprint(user.bp)
+    app.register_blueprint(activity.bp)
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -36,7 +45,6 @@ def create_app() -> Flask:
         app,
         resources={
             r"/api/*": {"origins": "*"},
-            r"/socket.io/*": {"origins": "*"},
         },
     )
 

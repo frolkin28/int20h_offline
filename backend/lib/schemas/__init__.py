@@ -17,4 +17,5 @@ from backend.lib.schemas.docs import (
     UpsertSubjectSuccessResponse,
     UpsertSubjectErrorResponse,
     AccountResponse,
+    ActivityResponse,
 )

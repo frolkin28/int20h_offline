@@ -57,9 +57,11 @@ class Activity(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     subject_id = db.Column(db.Integer, db.ForeignKey("subject.id"))
+    subject = db.relationship("Subject", backref="activities", lazy=True)
     date = db.Column(db.DateTime)
     type = db.Column(db.String)
     task_link = db.Column(db.String)
+    attendances = db.relationship("Attendance", backref="activity", lazy=True)
 
 
 class Attendance(db.Model):
