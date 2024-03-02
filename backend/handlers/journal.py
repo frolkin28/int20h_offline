@@ -1,5 +1,5 @@
 from typing import cast
-from backend.lib.auth import get_user_id_or_none
+from backend.lib.auth import get_user_id_or_none, permissions
 from backend.utils import error_response, success_response
 
 from flask import Blueprint, request
@@ -11,6 +11,8 @@ from backend.lib.schemas import (
     FullSubjectSchema,
     ActivitySchema,
 )
+
+from models import User, Role
 from backend.types import CreateSubjectPayload
 
 from backend.lib.journal import create_subject
@@ -26,8 +28,8 @@ bp = Blueprint("journal", __name__, url_prefix="/api/journal")
 
 
 @bp.route("/", methods=("POST",))
-@jwt_required()
-def add_subject():
+@permissions([Role.TEACHER])
+def add_subject(user: User):
     """
     ---
     post:
