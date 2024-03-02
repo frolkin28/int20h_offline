@@ -11,7 +11,7 @@ from backend.lib.schemas import CreateSubjectSchema
 from backend.models import User, Role
 from backend.types import CreateSubjectPayload
 
-from backend.lib.journal import create_subject, take_subject_list
+from backend.lib.journal import create_subject, take_subject_list, get_activites
 
 
 
@@ -80,19 +80,6 @@ def my_subjects(user: User):
     ---
     get:
         summary: Список предметів викладача
-        requestBody:
-            required: true
-            content:
-                multipart/form-data:
-                    schema:
-                        type: object
-                        properties:
-                            subject_id:
-                                type: integer
-                            subject_name:
-                                type: str
-                            group_name:
-                                type: str    
         responses:
             '200':
                 content:
@@ -115,3 +102,34 @@ def my_subjects(user: User):
         return error_response(status_code=400, errors=e.messages)
 
     return success_response(data={"subject_list": subjects_list})
+
+
+
+# FOR ALL ROLES
+@bp.route("/<int:id>", methods=("GET",))
+def subject_activity(id):
+    """
+    ---
+    get:
+        summary: Список завдань по конкретному предмету  
+        responses: 
+            '200':
+                content:
+                    application/json:
+                        schema: SubjectActivitesShcema
+            '400':
+                content:
+                    application/json:
+                        schema: UpsertSubjectErrorResponse
+            '401':
+                description: Користувач не авторизований
+        tags:
+        - journal
+    """
+
+    try:
+        activites_list = get_activites(id)
+    except ValidationError as e:
+        return error_response(status_code=400, errors=e.messages)
+
+    return success_response(data={"activites_list": activites_list})

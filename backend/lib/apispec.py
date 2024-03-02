@@ -17,6 +17,7 @@ from backend.lib.schemas import (
     UpsertSubjectErrorResponse,
     AccountResponse,
     SubjectGroupShcema,
+    SubjectActivitesShcema,
 )
 
 
@@ -76,6 +77,7 @@ def get_apispec(app: Flask) -> APISpec:
     spec.components.schema("UpsertSubjectSuccessResponse", schema=UpsertSubjectSuccessResponse)
     spec.components.schema("UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse)
     spec.components.schema("SubjectGroupShcema", schema=SubjectGroupShcema)
+    spec.components.schema("SubjectActivitesShcema", schema=SubjectActivitesShcema)
     
     create_tags(spec)
 

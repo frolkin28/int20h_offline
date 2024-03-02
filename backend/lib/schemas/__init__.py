@@ -5,6 +5,7 @@ from backend.lib.schemas.validation import (
     FullSubjectSchema,
     ActivitySchema,
     SubjectGroupShcema,
+    SubjectActivitesShcema,
 )
 
 from backend.lib.schemas.docs import (
