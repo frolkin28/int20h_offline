@@ -37,3 +37,45 @@ def account():
             "role": current_user.role.value,
         }
     )
+
+
+
+# @bp.route("/update", methods=("PUT",))
+# @jwt_required()
+# def account_update():
+#     """
+#     ---
+#     get:
+#         summary: Редагувати персональні дані користувача
+#         requestBody:
+#             required: true
+#             content:
+#                 multipart/form-data:
+#                     schema:
+#                         type: object
+#                         properties:
+#                             first_name:
+#                                 type: string
+#                             last_name:
+#                                 type: string
+#         responses:
+#             '200':
+#                 content:
+#                     application/json:
+#                         schema: UserUpdateSchema
+#             '401':
+#                 description: Користувач не авторизований
+#         tags:
+#         - users
+#     """
+#     user_id: int = current_user.id
+
+#     return success_response(
+#         data={
+#             "email": current_user.email,
+#             "first_name": current_user.first_name,
+#             "last_name": current_user.last_name,
+#             "role": current_user.role.value,
+#         }
+#     )
+

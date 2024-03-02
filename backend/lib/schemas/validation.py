@@ -17,6 +17,11 @@ class SignInSchema(Schema):
     password = fields.Str(required=True)
 
 
+class UserUpdateSchema(Schema):
+    first_name = fields.Str(required=True)
+    last_name = fields.Str(required=True)
+
+
 class FullSubjectSchema(Schema):
     name = fields.Str(required=True)
     teacher_id = fields.Int(required=True)

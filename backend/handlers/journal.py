@@ -75,7 +75,7 @@ def add_subject(user: User):
 
 @bp.route("/", methods=("GET",))
 @permissions([Role.TEACHER])
-def my_subjects(user: User):
+def my_subjects():
     """
     ---
     get:

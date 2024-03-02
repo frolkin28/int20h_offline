@@ -133,7 +133,7 @@ def permissions(roles: list[Role]):
     Usage:
     @app.route("/example")
     @permissions([Role.STUDENT])
-    def example(user: User):
+    def example():
         pass
     """
 
