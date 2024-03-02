@@ -1,12 +1,12 @@
 .welcomeMessage {
-    text-align: center; 
-    padding: 20px; 
+  text-align: center;
+  padding: 20px;
 }
-  
+
 .welcomeMessage p {
-    font-size: 30px; 
-    font-weight: bold;
-    color: #333; 
-    line-height: 1.5; 
-    margin-bottom: 20px; 
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }

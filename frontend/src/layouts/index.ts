@@ -1,1 +1,1 @@
-export { NavbarLayout } from "./NavbarLayout/NavbarLayout"
+export { NavbarLayout } from './NavbarLayout/NavbarLayout'
