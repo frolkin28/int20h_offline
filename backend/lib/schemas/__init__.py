@@ -13,6 +13,6 @@ from backend.lib.schemas.docs import (
     SignUpErrorResponse,
     AuthSuccessResponse,
     UpsertSubjectSuccessResponse,
-    UpsertSubjectErrorResponse
-
+    UpsertSubjectErrorResponse,
+    AccountResponse,
 )

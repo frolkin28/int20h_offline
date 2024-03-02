@@ -1,8 +1,8 @@
-"""<other tables>
+"""init
 
-Revision ID: 2f6aa38f9289
-Revises: c13931d3cd14
-Create Date: 2024-03-02 15:16:12.615191
+Revision ID: 5654816a8003
+Revises: 
+Create Date: 2024-03-02 19:18:15.898261
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2f6aa38f9289'
-down_revision = 'c13931d3cd14'
+revision = '5654816a8003'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -21,7 +21,27 @@ def upgrade():
     op.create_table('group',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
+    )
+    op.create_table('token_blacklist',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('jti', sa.String(length=36), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
+    )
+    with op.batch_alter_table('token_blacklist', schema=None) as batch_op:
+        batch_op.create_index(batch_op.f('ix_token_blacklist_jti'), ['jti'], unique=False)
+
+    op.create_table('users',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('email', sa.String(length=128), nullable=True),
+    sa.Column('first_name', sa.String(length=128), nullable=True),
+    sa.Column('last_name', sa.String(length=128), nullable=True),
+    sa.Column('password', sa.String(length=256), nullable=True),
+    sa.Column('role', sa.Enum('STUDENT', 'TEACHER', name='role'), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email')
     )
     op.create_table('subject',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -34,11 +54,11 @@ def upgrade():
     )
     op.create_table('activity',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('subject', sa.Integer(), nullable=True),
+    sa.Column('subject_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.DateTime(), nullable=True),
     sa.Column('type', sa.String(), nullable=True),
     sa.Column('task_link', sa.String(), nullable=True),
-    sa.ForeignKeyConstraint(['subject'], ['subject.id'], ),
+    sa.ForeignKeyConstraint(['subject_id'], ['subject.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('attendance',
@@ -58,5 +78,10 @@ def downgrade():
     op.drop_table('attendance')
     op.drop_table('activity')
     op.drop_table('subject')
+    op.drop_table('users')
+    with op.batch_alter_table('token_blacklist', schema=None) as batch_op:
+        batch_op.drop_index(batch_op.f('ix_token_blacklist_jti'))
+
+    op.drop_table('token_blacklist')
     op.drop_table('group')
     # ### end Alembic commands ###

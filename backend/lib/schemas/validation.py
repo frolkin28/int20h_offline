@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, validate
 
 from backend.models import Role, Active_type
 
@@ -34,9 +34,10 @@ class CreateSubjectSchema(Schema):
     activities = fields.List(fields.Nested(ActivitySchema))
 
 
+class CreateGroupSchema(Schema):
+    name = fields.Str(required=True)
+    
 class SubjectGroupShcema(Schema):
     subject_id = fields.Int(required=True)
     subject_name = fields.Str(required=True)
     group_name = fields.Str(required=True)
-
-

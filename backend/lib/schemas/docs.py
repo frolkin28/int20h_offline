@@ -56,3 +56,14 @@ class UpsertSubjectSuccessResponse(ResponseSchema):
 
 class UpsertSubjectErrorResponse(ResponseSchema):
     errors = errors_field(SubjectIdSchema)
+
+
+class UserSchema(Schema):
+    email = fields.Email(required=True)
+    first_name = fields.Str(required=True)
+    last_name = fields.Str(required=True)
+    role = fields.Int(required=True)
+
+
+class AccountResponse(ResponseSchema):
+    data = fields.Nested(UserSchema)

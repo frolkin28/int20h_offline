@@ -15,12 +15,18 @@ from backend.lib.schemas import (
     ActivitySchema,
     UpsertSubjectSuccessResponse,
     UpsertSubjectErrorResponse,
-    SubjectGroupShcema
+    AccountResponse,
+    SubjectGroupShcema,
 )
 
 
-TAGS = ({"name": "auth", "description": "Ендпоінти для аутентифікації"},
-        {"name": "journal", "description": "Ендпоінти функціоналу університета"})
+TAGS = (
+    {"name": "auth", "description": "Ендпоінти для аутентифікації"},
+    {"name": "group", "description": "Ендпоінти для маніпуляцій з групами"},
+    {"name": "journal", "description": "Ендпоінти функціоналу університета"},
+    {"name": "users", "description": "Ендпоінти користувачів"},
+)
+
 
 EXCLUDED_ENDPOINTS = {
     "static",
@@ -60,10 +66,17 @@ def get_apispec(app: Flask) -> APISpec:
     spec.components.schema("FullSubjectSchema", schema=FullSubjectSchema)
     spec.components.schema("ActivitySchema", schema=ActivitySchema)
     spec.components.schema("CreateSubjectSchema", schema=CreateSubjectSchema)
+    spec.components.schema(
+        "UpsertSubjectSuccessResponse", schema=UpsertSubjectSuccessResponse
+    )
+    spec.components.schema(
+        "UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse
+    )
+    spec.components.schema("AccountResponse", schema=AccountResponse)
     spec.components.schema("UpsertSubjectSuccessResponse", schema=UpsertSubjectSuccessResponse)
     spec.components.schema("UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse)
     spec.components.schema("SubjectGroupShcema", schema=SubjectGroupShcema)
-
+    
     create_tags(spec)
 
     load_docstrings(spec, app)
