@@ -1,1 +1,3 @@
 debug: false
+
+jwt_access_token_expires: 90

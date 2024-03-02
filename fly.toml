@@ -1,20 +1,20 @@
-# fly.toml app configuration file generated for int20h-2024-aged-butterfly-826 on 2024-02-07T00:35:23+02:00
+# fly.toml app configuration file generated for int20h-offline on 2024-03-02T19:24:22+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'int20h-2024-aged-butterfly-826'
+app = 'int20h-offline'
 primary_region = 'waw'
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = false
+  auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 1
+  min_machines_running = 0
   processes = ['app']
 
 [[vm]]
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 512
