@@ -12,3 +12,9 @@ class SignUpPayload(t.TypedDict):
 class SignInPayload(t.TypedDict):
     email: str
     password: str
+
+
+class CreateSubjectPayload(t.TypedDict):
+    name: str
+    group_id: int
+    activities: t.List[dict]

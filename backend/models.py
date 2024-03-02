@@ -8,6 +8,14 @@ class Role(Enum):
     TEACHER = 2
 
 
+class Active_type(Enum):
+    LECTURE = "lecture"
+    PRACTICE = "practice"
+    LABORATORY = "laboratory"
+    TEST = "test"
+    EXAM = "exam"
+
+
 class User(db.Model):
     __tablename__ = "users"
 
@@ -47,7 +55,7 @@ class Activity(db.Model):
     tablename = "activity"
 
     id = db.Column(db.Integer, primary_key=True)
-    subject = db.Column(db.Integer, db.ForeignKey("subject.id"))
+    subject_id = db.Column(db.Integer, db.ForeignKey("subject.id"))
     date = db.Column(db.DateTime)
     type = db.Column(db.String)
     task_link = db.Column(db.String)

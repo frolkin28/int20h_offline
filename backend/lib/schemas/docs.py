@@ -44,3 +44,15 @@ class ErrorMessageSchema(Schema):
 
 class ErrorMessageResponse(ResponseSchema):
     errors = fields.Nested(ErrorMessageSchema)
+
+
+class SubjectIdSchema(Schema):
+    lot_id = fields.Int(required=True)
+
+
+class UpsertSubjectSuccessResponse(ResponseSchema):
+    data = fields.Nested(SubjectIdSchema)
+
+
+class UpsertSubjectErrorResponse(ResponseSchema):
+    errors = errors_field(SubjectIdSchema)

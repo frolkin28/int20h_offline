@@ -10,10 +10,17 @@ from backend.lib.schemas import (
     ErrorMessageResponse,
     SignInErrorResponse,
     SignUpErrorResponse,
+    CreateSubjectSchema,
+    FullSubjectSchema,
+    ActivitySchema,
+    UpsertSubjectSuccessResponse,
+    UpsertSubjectErrorResponse,
 )
 
 
-TAGS = ({"name": "auth", "description": "Ендпоінти для аутентифікації"},)
+TAGS = ({"name": "auth", "description": "Ендпоінти для аутентифікації"},
+        {"name": "journal", "description": "Ендпоінти функціоналу університета"})
+
 EXCLUDED_ENDPOINTS = {
     "static",
     "swagger",
@@ -48,6 +55,12 @@ def get_apispec(app: Flask) -> APISpec:
     spec.components.schema("ErrorMessageResponse", schema=ErrorMessageResponse)
     spec.components.schema("SignInErrorResponse", schema=SignInErrorResponse)
     spec.components.schema("SignUpErrorResponse", schema=SignUpErrorResponse)
+
+    spec.components.schema("FullSubjectSchema", schema=FullSubjectSchema)
+    spec.components.schema("ActivitySchema", schema=ActivitySchema)
+    spec.components.schema("CreateSubjectSchema", schema=CreateSubjectSchema)
+    spec.components.schema("UpsertSubjectSuccessResponse", schema=UpsertSubjectSuccessResponse)
+    spec.components.schema("UpsertSubjectErrorResponse", schema=UpsertSubjectErrorResponse)
 
     create_tags(spec)
 
