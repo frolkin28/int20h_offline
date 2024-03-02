@@ -34,5 +34,9 @@ class CreateSubjectSchema(Schema):
     activities = fields.List(fields.Nested(ActivitySchema))
 
 
+class SubjectGroupShcema(Schema):
+    subject_id = fields.Int(required=True)
+    subject_name = fields.Str(required=True)
+    group_name = fields.Str(required=True)
 
 

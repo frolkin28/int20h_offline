@@ -18,3 +18,4 @@ class CreateSubjectPayload(t.TypedDict):
     name: str
     group_id: int
     activities: t.List[dict]
+
