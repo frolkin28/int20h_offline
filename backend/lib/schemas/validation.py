@@ -63,7 +63,5 @@ class EditAttendanceSchema(Schema):
 
 
 class mailSchema(Schema):
-    target = fields.Int(required=True)
+    target = fields.Str(required=True)
     text = fields.Str(required=True)
-
-
