@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom'
 import styles from './Navbar.module.css'
 import { AuthContext } from '../../AuthContext'
 import { UserRole } from '../../types'
-import { link } from 'fs'
 
 export const Navbar = () => {
   const { user, isSignedIn, logout } = useContext(AuthContext)
@@ -12,6 +11,9 @@ export const Navbar = () => {
   if (user?.role === UserRole.Student) {
     links = (
       <>
+        <li>
+          <RouterLink to={'/account'}>Аккаунт</RouterLink>
+        </li>
         <li>
           <RouterLink to={'/mock'}>Групи</RouterLink>
         </li>
@@ -24,6 +26,9 @@ export const Navbar = () => {
   if (user?.role === UserRole.Teacher) {
     links = (
       <>
+        <li>
+          <RouterLink to={'/account'}>Аккаунт</RouterLink>
+        </li>
         <li>
           <RouterLink to={'/groups'}>Групи</RouterLink>
         </li>
