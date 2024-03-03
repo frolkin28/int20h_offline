@@ -48,6 +48,24 @@ services:
     depends_on:
       - postgres
 
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    tty: true
+    init: true
+    stdin_open: true
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/tsconfig.json:/app/tsconfig.json
+      - ./frontend/yarn.lock:/app/yarn.lock
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
   tests:
     <<: *base-dev
     build:
@@ -56,8 +74,8 @@ services:
       target: test
     command: pdm run pytest backend/tests
     environment:
-     aws_access_key_id: test_key_id
-     aws_secret_access_key: test_access_key
+      aws_access_key_id: test_key_id
+      aws_secret_access_key: test_access_key
     depends_on:
       - postgres-test
 
