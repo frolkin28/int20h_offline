@@ -1,4 +1,6 @@
-from backend.models import Activity, User, User
+from sqlalchemy.exc import IntegrityError
+
+from backend.models import Activity, User, User, Attendance
 
 from backend.services.db import db
 
@@ -53,3 +55,30 @@ def get_activity(activity_id: int) -> dict | None:
             for student in students
         ],
     }
+
+
+def edit_student_attendance(
+    activity_id: int,
+    student_id: int,
+    mark: str | None,
+) -> bool:
+    attendance = Attendance.query.filter(
+        Attendance.id == activity_id,
+        Attendance.users_id == student_id,
+    ).first()
+    if attendance:
+        attendance.mark = mark
+    else:
+        db.session.add(
+            Attendance(
+                activity_id=activity_id,
+                users_id=student_id,
+                mark=mark,
+            )
+        )
+    try:
+        db.session.commit()
+    except IntegrityError:
+        return False
+
+    return True

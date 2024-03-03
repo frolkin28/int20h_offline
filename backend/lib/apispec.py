@@ -22,6 +22,7 @@ from backend.lib.schemas import (
     ActivityResponse,
     GroupsListResponse,
     StudentsListResponse,
+    EditAttendanceSchema,
 )
 
 
@@ -32,6 +33,7 @@ TAGS = (
     {"name": "users", "description": "Ендпоінти користувачів"},
     {"name": "activity", "description": "Ендпоінти активностей"},
     {"name": "students", "description": "Ендпоінти студентів"},
+    {"name": "attendance", "description": "Ендпоінти для відвідування та оцінок"},
 )
 
 
@@ -88,6 +90,8 @@ def get_apispec(app: Flask) -> APISpec:
 
     spec.components.schema("GroupsListResponse", schema=GroupsListResponse)
     spec.components.schema("StudentsListResponse", schema=StudentsListResponse)
+
+    spec.components.schema("EditAttendanceSchema", schema=EditAttendanceSchema)
 
     create_tags(spec)
 
