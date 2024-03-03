@@ -32,13 +32,9 @@ def news():
                                 type: str
         responses:
             '200':
-                content:
-                    application/json:
-                        schema: success_response
+                description: Успіх
             '400':
-                content:
-                    application/json:
-                        schema: error_response
+                description: Помилка валідації
         tags:
         - newsletter
     """

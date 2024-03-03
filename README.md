@@ -9,7 +9,7 @@ urls:
 
 - site: `http://localhost:3000/`
 - api: `http://localhost:8080/api`
-- apidocs: `http://localhost:8080/docs/`
+- apidocs: `http://localhost:8080/docs/` or `https://int20h-offline.fly.dev/docs/`
 
 ### First run
 
