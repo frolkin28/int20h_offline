@@ -89,14 +89,17 @@ def edit_student_attendance(
 
 def send_email( student_id:int, mark:str, activity_id:int)-> None:
 
-    person = User.query.get(student_id)
-    activity = Activity.query.get(activity_id)
-    subject = Subject.query.get(activity.subject_id)
+    try:
+        person = User.query.get(student_id)
+        activity = Activity.query.get(activity_id)
+        subject = Subject.query.get(activity.subject_id)
 
-    theme = 'Вашу роботу оцінено'
-    body = f'Вітаємо, {person.first_name} {person.last_name}!\nВашу роботу: ({activity.type}) з дисципліни {subject.name} було оцінено, оцінка становить {mark} балів'
+        theme = 'Вашу роботу оцінено'
+        body = f'Вітаємо, {person.first_name} {person.last_name}!\nВашу роботу: ({activity.type}) з дисципліни {subject.name} було оцінено, оцінка становить {mark} балів'
 
-    message = Message(subject=theme, body=body, sender=current_app.config['MAIL_USERNAME'], recipients=person.email)
+        message = Message(subject=theme, body=body, sender=current_app.config['MAIL_USERNAME'], recipients=person.email)
 
-    with current_app.app_context():
-        mail.send(message)
+        with current_app.app_context():
+            mail.send(message)
+    except:
+        return None
