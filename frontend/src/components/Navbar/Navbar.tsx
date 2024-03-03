@@ -6,20 +6,17 @@ import { UserRole } from '../../types'
 import { link } from 'fs'
 
 export const Navbar = () => {
-  const { user, logout } = useContext(AuthContext)
+  const { user, isSignedIn, logout } = useContext(AuthContext)
 
   let links
   if (user?.role === UserRole.Student) {
     links = (
       <>
         <li>
-          <RouterLink to={'/lots/edit'}>Редагувати</RouterLink>
+          <RouterLink to={'/mock'}>Групи</RouterLink>
         </li>
         <li>
-          <RouterLink to={'/lots/edit'}>Редагувати</RouterLink>
-        </li>
-        <li>
-          <RouterLink to={'/lots/edit'}>Редагувати</RouterLink>
+          <RouterLink to={'/mock'}>Мої предмети</RouterLink>
         </li>
       </>
     )
@@ -33,6 +30,9 @@ export const Navbar = () => {
         <li>
           <RouterLink to={'/subjects'}>Оцінювання</RouterLink>
         </li>
+        <li>
+          <RouterLink to={'/subjects'}>Рейтинг</RouterLink>
+        </li>
       </>
     )
   }
@@ -45,9 +45,11 @@ export const Navbar = () => {
         </RouterLink>
         <ul>{links}</ul>
       </div>
-      <a href="#" onClick={logout}>
-        Вийти
-      </a>
+      {isSignedIn ? (
+        <a href="#" onClick={logout}>
+          Вийти
+        </a>
+      ) : null}
     </div>
   )
 }

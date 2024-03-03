@@ -6,9 +6,9 @@ import formStyles from '../Forms.module.css'
 import { TextInput } from '../../Inputs/TextInput'
 import { ActivityDto } from '../../../types'
 import { ActivityItemForm } from './ActivityItemForm'
-import {Button} from "../../Buttons/Button";
-import styles from "./CreateSubjectForm.module.css"
-import { useNavigate } from "react-router-dom";
+import { Button } from '../../Buttons/Button'
+import styles from './CreateSubjectForm.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const getEmptyActivity = () => ({
   type: undefined,
@@ -23,7 +23,9 @@ export const CreateSubjectForm = () => {
 
   const [name, setName] = useState('')
   const [selectedGroupId, setSelectedGroupId] = useState<number | null>(null)
-  const [activities, setActivities] = useState<ActivityDto[]>([getEmptyActivity()])
+  const [activities, setActivities] = useState<ActivityDto[]>([
+    getEmptyActivity(),
+  ])
 
   const [groups, setGroups] = useState<Group[]>([])
 
@@ -55,13 +57,18 @@ export const CreateSubjectForm = () => {
   const handleSubmit = async () => {
     console.log(activities)
     try {
-      const filteredActivities = activities.filter((activity) => activity.date?.length && activity.task_link?.length && activity.type?.length)
+      const filteredActivities = activities.filter(
+        (activity) =>
+          activity.date?.length &&
+          activity.task_link?.length &&
+          activity.type?.length
+      )
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/journal/`,
         {
           name,
           group_id: selectedGroupId,
-          activities: filteredActivities
+          activities: filteredActivities,
         },
         {
           headers: {
@@ -69,11 +76,10 @@ export const CreateSubjectForm = () => {
           },
         }
       )
-      navigate("/subjects")
+      navigate('/subjects')
     } catch (error: any) {
-      alert("Сталася помилка")
+      alert('Сталася помилка')
     } finally {
-
     }
   }
 
@@ -121,14 +127,17 @@ export const CreateSubjectForm = () => {
         <TextInput id="name" value={name} onChange={handleNameChange} />
       </div>
       {groupSelect}
-      <div className={styles.activitiesWrapper}>
-        {renderedActivities}
-      </div>
+      <div className={styles.activitiesWrapper}>{renderedActivities}</div>
       <div className={styles.buttonWrapper}>
-        <Button text="Додати" secondary={true} onClick={addActivity}/>
-        <Button text="Видалити" secondary={true} onClick={removeActivity} disabled={activities.length === 1} />
+        <Button text="Додати" secondary={true} onClick={addActivity} />
+        <Button
+          text="Видалити"
+          secondary={true}
+          onClick={removeActivity}
+          disabled={activities.length === 1}
+        />
       </div>
-      <div className={styles.buttonWrapper} style={{marginTop: "10px"}}>
+      <div className={styles.buttonWrapper} style={{ marginTop: '10px' }}>
         <Button text="Створити" onClick={handleSubmit} disabled={false} />
       </div>
     </form>
