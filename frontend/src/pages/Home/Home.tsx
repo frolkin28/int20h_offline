@@ -17,6 +17,8 @@ export const HomePage = () => {
   useEffect(() => {
     if (isSignedIn) {
       setPageMode(PageMode.Welcome)
+    } else {
+      setPageMode(PageMode.SignIn)
     }
   }, [isSignedIn])
 

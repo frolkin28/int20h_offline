@@ -1,0 +1,15 @@
+.container {
+  background: #aa23e4;
+  height: 100px;
+  width: 200px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 10px;
+  color: white;
+}
+
+.subjectName {
+  font-weight: bold;
+}
