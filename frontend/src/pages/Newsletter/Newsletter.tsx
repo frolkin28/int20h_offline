@@ -55,7 +55,6 @@ export const Newsletter = () => {
     <div>
       <h1>Створити розсилку (сповіщення)</h1>
       <div>
-        <h1>My Form Page</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="target">Target:</label>

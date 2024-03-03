@@ -17,7 +17,11 @@ export const Account = () => {
   }
 
   const saveAccountInfo = () => {
-    alert('Account saved')
+    if (!(firstName && lastName)) {
+      alert('Заповніть всі поля')
+    } else {
+      alert('Збережено')
+    }
   }
 
   if (!isSignedIn) {
@@ -27,6 +31,14 @@ export const Account = () => {
   return (
     <div>
       <h1>Кабінет користувача</h1>
+      <div>
+        <p>
+          <strong>Ім'я:</strong> {firstName}
+        </p>
+        <p>
+          <strong>Прізвище:</strong> {lastName}
+        </p>
+      </div>
       <div>
         <label htmlFor="firstName">Ім'я:</label>
         <input
@@ -46,15 +58,7 @@ export const Account = () => {
         />
       </div>
       <div>
-        <button onClick={saveAccountInfo}>Submit</button>
-      </div>
-      <div>
-        <p>
-          <strong>First Name:</strong> {firstName}
-        </p>
-        <p>
-          <strong>Last Name:</strong> {lastName}
-        </p>
+        <button onClick={saveAccountInfo}>Зберегти</button>
       </div>
     </div>
   )
