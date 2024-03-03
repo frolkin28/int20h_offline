@@ -51,12 +51,11 @@ def create_subject(payload: CreateSubjectPayload, user_id : int)-> int:
 
 def take_subject_list(user_id: int) -> list:
     
-    subjects = Subject.query\
-        .join(Group, Subject.group_id == Group.id)\
-        .filter(Subject.teacher_id == user_id)\
-        .options(joinedload(Subject.group))\
+    subjects = (
+        Subject.query
+        .filter(Subject.teacher_id == user_id)
         .all()
-    
+    )
     data = []
     
     for subject in subjects:
