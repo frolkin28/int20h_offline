@@ -35,10 +35,6 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/activities',
-        element: <HomePage />,
-      },
-      {
         path: '/subject/:id',
         element: <Subject />,
       },
