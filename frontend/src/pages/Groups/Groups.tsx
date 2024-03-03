@@ -58,16 +58,18 @@ export const GroupsPage = () => {
   }
 
   const groupSelect = (
-    <select onChange={handleGroupSelect}>
-      <option value="">Оберіть групу</option>
-      {groups.map((group) => (
-        <option value={group.id}>{group.name}</option>
-      ))}
-    </select>
+    <div className={styles.selectWrapper}>
+      <select onChange={handleGroupSelect}>
+        <option value="">Оберіть групу</option>
+        {groups.map((group) => (
+          <option value={group.id}>{group.name}</option>
+        ))}
+      </select>
+    </div>
   )
 
   const table = (
-    <table>
+    <table className={styles.studentsTable}>
       <tr>
         <th>Імʼя</th>
         <th>Прізвище</th>

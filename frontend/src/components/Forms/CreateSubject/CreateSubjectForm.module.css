@@ -2,10 +2,12 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    margin: 10px 0;
+    /*margin: 10px 0;*/
 }
 
 .activityFormContainer {
+    border-top: 1px solid #a8a8a8;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
 }
@@ -18,4 +20,18 @@ input, select {
     background: #fff;
     margin-top: 5px;
     font-size: 16px;
+}
+
+.formContainer {
+    width: 450px;
+}
+
+.buttonWrapper {
+    width: 100%;
+    display: flex;
+    column-gap: 10px;
+}
+
+.buttonWrapper>button {
+    flex-grow: 1;
 }

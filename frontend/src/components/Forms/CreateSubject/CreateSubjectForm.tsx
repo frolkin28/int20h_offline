@@ -8,6 +8,7 @@ import { ActivityDto } from '../../../types'
 import { ActivityItemForm } from './ActivityItemForm'
 import {Button} from "../../Buttons/Button";
 import styles from "./CreateSubjectForm.module.css"
+import { useNavigate } from "react-router-dom";
 
 const getEmptyActivity = () => ({
   type: undefined,
@@ -16,6 +17,8 @@ const getEmptyActivity = () => ({
 })
 
 export const CreateSubjectForm = () => {
+  const navigate = useNavigate()
+
   const { token } = useContext(AuthContext)
 
   const [name, setName] = useState('')
@@ -66,9 +69,8 @@ export const CreateSubjectForm = () => {
           },
         }
       )
-      console.log("СТВОРИВ БЛЯТЬ", response.data.data)
+      navigate("/subjects")
     } catch (error: any) {
-      console.log(error)
       alert("Сталася помилка")
     } finally {
 
@@ -113,20 +115,22 @@ export const CreateSubjectForm = () => {
   })
 
   return (
-    <div>
-      <form>
-        <div className={formStyles.inputContainer}>
-          <label htmlFor="name">Назва</label>
-          <TextInput id="name" value={name} onChange={handleNameChange} />
-        </div>
-        {groupSelect}
-        <div className={styles.activitiesWrapper}>
-          {renderedActivities}
-        </div>
-        <button onClick={addActivity} type="button">Add</button>
-        <button onClick={removeActivity} type="button" disabled={activities.length === 1}>Remove</button>
+    <form className={styles.formContainer}>
+      <div className={formStyles.inputContainer}>
+        <label htmlFor="name">Назва</label>
+        <TextInput id="name" value={name} onChange={handleNameChange} />
+      </div>
+      {groupSelect}
+      <div className={styles.activitiesWrapper}>
+        {renderedActivities}
+      </div>
+      <div className={styles.buttonWrapper}>
+        <Button text="Додати" secondary={true} onClick={addActivity}/>
+        <Button text="Видалити" secondary={true} onClick={removeActivity} disabled={activities.length === 1} />
+      </div>
+      <div className={styles.buttonWrapper} style={{marginTop: "10px"}}>
         <Button text="Створити" onClick={handleSubmit} disabled={false} />
-      </form>
-    </div>
+      </div>
+    </form>
   )
 }

@@ -3,6 +3,7 @@ import { UserRole } from '../../types'
 import { AuthContext } from '../../AuthContext'
 import { CreateSubjectForm } from '../../components'
 import { useNavigate } from 'react-router-dom'
+import styles from './Subject.module.css'
 
 export const CreateSubjectPage = () => {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ export const CreateSubjectPage = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <CreateSubjectForm />
     </div>
   )

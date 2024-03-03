@@ -24,7 +24,7 @@ def create_activities(activities_data: list, subject_id: int) -> None:
         new_active = Activity(
             subject_id=subject_id,
             date=active["date"],
-            type=active["type"],
+            type=active["type"].value,
             task_link=active["task_link"],
         )
         db.session.add(new_active)
