@@ -7,6 +7,7 @@ from backend.services.mail_service import mail
 
 from flask_mail import Message
 
+
 def _extract_attendance(user_attendance_map: dict, user_id: int) -> dict | None:
     attendance = user_attendance_map.get(user_id)
     return (
@@ -87,17 +88,22 @@ def edit_student_attendance(
     return True
 
 
-def send_email( student_id:int, mark:str, activity_id:int)-> None:
+def send_email(student_id: int, mark: str, activity_id: int) -> None:
 
     try:
         person = User.query.get(student_id)
         activity = Activity.query.get(activity_id)
         subject = Subject.query.get(activity.subject_id)
 
-        theme = 'Вашу роботу оцінено'
-        body = f'Вітаємо, {person.first_name} {person.last_name}!\nВашу роботу: ({activity.type}) з дисципліни {subject.name} було оцінено, оцінка становить {mark} балів'
+        theme = "Вашу роботу оцінено"
+        body = f"Вітаємо, {person.first_name} {person.last_name}!\nВашу роботу: ({activity.type}) з дисципліни {subject.name} було оцінено, оцінка становить {mark} балів"
 
-        message = Message(subject=theme, body=body, sender=current_app.config['MAIL_USERNAME'], recipients=person.email)
+        message = Message(
+            subject=theme,
+            body=body,
+            sender=current_app.config["MAIL_USERNAME"],
+            recipients=person.email,
+        )
 
         with current_app.app_context():
             mail.send(message)

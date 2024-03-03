@@ -6,6 +6,7 @@ import {
   GroupsPage,
   CreateGroupPage,
   Subject,
+  Activity,
 } from './pages'
 
 export const router = createBrowserRouter([
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/activity/:id',
-        element: <HomePage />,
+        element: <Activity />,
       },
     ],
   },
