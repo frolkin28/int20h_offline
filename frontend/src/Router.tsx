@@ -5,7 +5,8 @@ import {
   SubjectsPage,
   GroupsPage,
   CreateGroupPage,
-  Subject,
+  CreateSubjectPage,
+  Subject
 } from './pages'
 
 export const router = createBrowserRouter([
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/subjects/create',
-        element: <HomePage />,
+        element: <CreateSubjectPage />,
       },
       {
         path: '/subject/:id',
