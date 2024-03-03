@@ -7,7 +7,7 @@ import {
   CreateGroupPage,
   CreateSubjectPage,
   Subject,
-  Activity
+  Activity,
 } from './pages'
 
 export const router = createBrowserRouter([

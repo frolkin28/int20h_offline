@@ -1,6 +1,6 @@
 import formStyles from '../Forms.module.css'
 import { ChangeEvent } from 'react'
-import styles from "./CreateSubjectForm.module.css"
+import styles from './CreateSubjectForm.module.css'
 
 const types = ['lecture', 'practice', 'laboratory', 'test', 'exam']
 
@@ -33,8 +33,8 @@ export const ActivityItemForm = (props: ActivityItemFormProps) => {
   }
 
   const handleDatetimeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dateOnChange(e.target.value);
-  };
+    dateOnChange(e.target.value)
+  }
 
   return (
     <div className={styles.activityFormContainer}>
@@ -44,11 +44,7 @@ export const ActivityItemForm = (props: ActivityItemFormProps) => {
         <input type="text" onChange={handleTaskLinkChange} />
       </div>
       <div>
-        <input
-          type="date"
-          name="date-time"
-          onChange={handleDatetimeChange}
-        />
+        <input type="date" name="date-time" onChange={handleDatetimeChange} />
       </div>
     </div>
   )
