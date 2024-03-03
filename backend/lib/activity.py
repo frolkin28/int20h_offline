@@ -1,9 +1,11 @@
 from sqlalchemy.exc import IntegrityError
 
-from backend.models import Activity, User, User, Attendance
-
+from backend.models import Activity, User, User, Attendance, Subject
+from flask import current_app
 from backend.services.db import db
+from backend.services.mail_service import mail
 
+from flask_mail import Message
 
 def _extract_attendance(user_attendance_map: dict, user_id: int) -> dict | None:
     attendance = user_attendance_map.get(user_id)
@@ -78,7 +80,23 @@ def edit_student_attendance(
         )
     try:
         db.session.commit()
+        send_email(student_id, mark, activity_id)
     except IntegrityError:
         return False
 
     return True
+
+
+def send_email( student_id:int, mark:str, activity_id:int)-> None:
+
+    person = User.query.get(student_id)
+    activity = Activity.query.get(activity_id)
+    subject = Subject.query.get(activity.subject_id)
+
+    theme = 'Вашу роботу оцінено'
+    body = f'Вітаємо, {person.first_name} {person.last_name}!\nВашу роботу: ({activity.type}) з дисципліни {subject.name} було оцінено, оцінка становить {mark} балів'
+
+    message = Message(subject=theme, body=body, sender=current_app.config['MAIL_USERNAME'], recipients=person.email)
+
+    with current_app.app_context():
+        mail.send(message)
