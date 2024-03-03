@@ -55,16 +55,8 @@ def add_subject():
     user_id: int = current_user.id
 
     try:
-        request_data = cast(
-            CreateSubjectPayload,
-            CreateSubjectSchema().load(
-                {
-                    "name": request.form.get("name"),
-                    "group_id": request.form.get("group_id"),
-                    "activities": request.form.get("activities"),
-                }
-            ),
-        )
+        request_data = CreateSubjectSchema().load(request.json)
+
     except ValidationError as e:
         return error_response(status_code=400, errors=e.messages)
 
