@@ -19,4 +19,5 @@ from backend.lib.schemas.docs import (
     AccountResponse,
     ActivityResponse,
     GroupsListResponse,
+    StudentsListResponse,
 )
