@@ -86,6 +86,7 @@ def get_apispec(app: Flask) -> APISpec:
 
     spec.components.schema("GroupsListResponse", schema=GroupsListResponse)
 
+
     create_tags(spec)
 
     load_docstrings(spec, app)

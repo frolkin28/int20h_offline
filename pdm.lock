@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:6d2a7ccd30eb3691d734972833fa64c2a5c72191435887ff0a99b547f0a390b1"
+content_hash = "sha256:8aecf3dc01d389f2d980a8e17f226d8a0e899e7054c9a8f3918a0c759a8015a0"
 
 [[package]]
 name = "alembic"
@@ -162,6 +162,18 @@ dependencies = [
 files = [
     {file = "Flask-JWT-Extended-4.6.0.tar.gz", hash = "sha256:9215d05a9413d3855764bcd67035e75819d23af2fafb6b55197eb5a3313fdfb2"},
     {file = "Flask_JWT_Extended-4.6.0-py2.py3-none-any.whl", hash = "sha256:63a28fc9731bcc6c4b8815b6f954b5904caa534fc2ae9b93b1d3ef12930dca95"},
+]
+
+[[package]]
+name = "flask-mail"
+version = "0.9.1"
+summary = "Flask extension for sending email"
+dependencies = [
+    "Flask",
+    "blinker",
+]
+files = [
+    {file = "Flask-Mail-0.9.1.tar.gz", hash = "sha256:22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"},
 ]
 
 [[package]]

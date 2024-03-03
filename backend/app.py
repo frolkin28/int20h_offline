@@ -16,7 +16,7 @@ from backend.config import get_config
 from backend.services.db import db, migrate
 from backend.lib.auth import jwt
 from backend.lib.apispec import get_apispec
-
+from backend.services.mail_service import configure_mail_service, mail
 
 def create_app() -> Flask:
     app = Flask(__name__)
@@ -32,6 +32,10 @@ def create_app() -> Flask:
 
     db.init_app(app)
     migrate.init_app(app, db)
+    mail.init_app(app)
+
+
+    configure_mail_service(app)
 
     jwt.init_app(app)
 

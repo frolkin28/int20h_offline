@@ -20,7 +20,7 @@ bp = Blueprint("journal", __name__, url_prefix="/api/journal")
 
 @bp.route("/", methods=("POST",))
 @permissions([Role.TEACHER])
-def add_subject(user: User):
+def add_subject():
     """
     ---
     post:
