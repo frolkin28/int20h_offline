@@ -24,3 +24,8 @@ class CreateSubjectPayload(t.TypedDict):
 class UpdateUserload(t.TypedDict):
     first_name: str
     last_name: str
+
+
+class loadMailtemplate(t.TypedDict):
+    target: int
+    text: str

@@ -13,6 +13,7 @@ from backend.handlers import (
     activity,
     student,
     attendance,
+    newsletter,
 )
 from backend.config import get_config
 from backend.services.db import db, migrate
@@ -33,6 +34,7 @@ def create_app() -> Flask:
     app.register_blueprint(activity.bp)
     app.register_blueprint(student.bp)
     app.register_blueprint(attendance.bp)
+    app.register_blueprint(newsletter.bp)
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -13,5 +13,5 @@ class UserAlreadyExist(Exception):
 class GroupDoesNotExist(Exception):
     pass
 
-class MessageNotSent(Exception):
+class MessageNotsent(Exception):
     pass

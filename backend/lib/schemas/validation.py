@@ -60,3 +60,10 @@ class EditAttendanceSchema(Schema):
     activity_id = fields.Int(required=True)
     student_id = fields.Int(required=True)
     mark = fields.Str()
+
+
+class mailSchema(Schema):
+    target = fields.Int(required=True)
+    text = fields.Str(required=True)
+
+
