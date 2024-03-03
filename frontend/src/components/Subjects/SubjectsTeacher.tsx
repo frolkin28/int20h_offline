@@ -26,35 +26,7 @@ export const SubjectsTeacher = () => {
             },
           }
         )
-        const mockSubjects = [
-          {
-            subject_id: 1,
-            subject_name: 'Matan',
-            group_name: 'KN-52',
-          },
-          {
-            subject_id: 2,
-            subject_name: 'Matan',
-            group_name: 'KN-52',
-          },
-          {
-            subject_id: 3,
-            subject_name: 'Matan',
-            group_name: 'KN-52',
-          },
-          {
-            subject_id: 4,
-            subject_name: 'Matan',
-            group_name: 'KN-52',
-          },
-          {
-            subject_id: 5,
-            subject_name: 'Matan',
-            group_name: 'KN-52',
-          },
-        ]
-        setSubjects(mockSubjects)
-        // setSubjects(response.data.data.subject_list)
+        setSubjects(response.data.data.subject_list)
       } catch (error) {
         alert('Сталася помилка')
       }
@@ -65,7 +37,7 @@ export const SubjectsTeacher = () => {
     <SubjectCard
       name={subject.subject_name}
       group={subject.group_name}
-      link={'/'}
+      link={`/subject/${subject.subject_id}`}
     />
   ))
 

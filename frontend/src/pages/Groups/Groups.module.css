@@ -13,3 +13,11 @@ td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+
+.studentsTable {
+  width: 100%;
+}
+
+.selectWrapper {
+  width: 450px;
+}
