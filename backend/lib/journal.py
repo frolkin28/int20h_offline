@@ -17,26 +17,25 @@ from backend.services.db import db
 #     InvalidDateError,
 # )
 
-def create_activities( activities_data: list, subject_id: int) -> None:
-    
+
+def create_activities(activities_data: list, subject_id: int) -> None:
+
     for active in activities_data:
         new_active = Activity(
-
-            subject_id = subject_id,
-            date = active["date"],
-            type = active["type"],
-            task_link = active["task_link"]
+            subject_id=subject_id,
+            date=active["date"],
+            type=active["type"],
+            task_link=active["task_link"],
         )
         db.session.add(new_active)
     db.session.commit()
 
 
-def create_subject(payload: CreateSubjectPayload, user_id : int)-> int:
-
+def create_subject(payload: CreateSubjectPayload, user_id: int) -> int:
 
     subject = Subject(
         name=payload["name"],
-        teacher_id = user_id,
+        teacher_id=user_id,
         group_id=payload["group_id"],
     )
     db.session.add(subject)
@@ -49,27 +48,21 @@ def create_subject(payload: CreateSubjectPayload, user_id : int)-> int:
 
 
 def take_subject_list(user_id: int) -> list:
-    
-    subjects = (
-        Subject.query
-        .filter(Subject.teacher_id == user_id)
-        .all()
-    )
+    subjects = Subject.query.filter(Subject.teacher_id == user_id).all()
     data = []
-    
+
     for subject in subjects:
         subject_dict = {
             "subject_id": subject.id,
             "subject_name": subject.name,
-            "group_name": subject.group.name
+            "group_name": subject.group.name,
         }
-        data.append(subject)
+        data.append(subject_dict)
 
     return data
 
 
 def get_activites(subject_id: int) -> list:
-    
     data = []
     activites = Activity.query.filter(Activity.subject_id == subject_id).all()
 
@@ -77,8 +70,7 @@ def get_activites(subject_id: int) -> list:
         active_dict = {
             "active_id": active.id,
             "type": active.active,
-            "date": active.date
+            "date": active.date.strftime("%Y-%m-%d %H:%M:%S"),
         }
-        data.append(active_dict) 
-    return(data)
-
+        data.append(active_dict)
+    return data

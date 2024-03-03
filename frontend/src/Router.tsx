@@ -1,6 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { NavbarLayout } from './layouts'
-import { HomePage, SubjectsPage, GroupsPage, CreateGroupPage } from './pages'
+import {
+  HomePage,
+  SubjectsPage,
+  GroupsPage,
+  CreateGroupPage,
+  Subject,
+} from './pages'
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +32,14 @@ export const router = createBrowserRouter([
       },
       {
         path: '/subjects/create',
+        element: <HomePage />,
+      },
+      {
+        path: '/subject/:id',
+        element: <Subject />,
+      },
+      {
+        path: '/activity/:id',
         element: <HomePage />,
       },
     ],
