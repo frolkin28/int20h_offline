@@ -54,3 +54,9 @@ class SubjectActivitesShcema(Schema):
     active_id = fields.Int(required=True)
     type = fields.Str(required=True)
     date = fields.DateTime(required=True)
+
+
+class EditAttendanceSchema(Schema):
+    activity_id = fields.Int(required=True)
+    student_id = fields.Int(required=True)
+    mark = fields.Str()
