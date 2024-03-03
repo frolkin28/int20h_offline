@@ -1,11 +1,14 @@
 import { useContext, useState } from 'react'
 import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
 import { TextInput, Button } from '../..'
 import styles from './SignInUpForm.module.css'
 import formStyles from '../Forms.module.css'
 import { AuthContext } from '../../../AuthContext'
 
 export const SignInForm = () => {
+  const navigate = useNavigate()
+
   const { login } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
@@ -34,6 +37,7 @@ export const SignInForm = () => {
         }
       )
       login(res.data.data.access_token)
+      navigate('/')
     } catch (error: any) {
       const message =
         error.response?.status === 400

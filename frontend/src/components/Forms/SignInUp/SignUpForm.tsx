@@ -12,6 +12,7 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastname] = useState('')
+  const [group, setGroup] = useState('')
   const [password, setPassword] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
   const [role, setRole] = useState(UserRole.Student)
@@ -20,6 +21,7 @@ export const SignUpForm = () => {
   const handleEmailChange = (value: string) => setEmail(value)
   const handleFirstNameChange = (value: string) => setFirstName(value)
   const handleLastNameChange = (value: string) => setLastname(value)
+  const handleGroupChange = (value: string) => setGroup(value)
   const handlePasswordChange = (value: string) => setPassword(value)
   const handlePasswordRepeatChange = (value: string) => setPasswordRepeat(value)
   const handleRoleOptionChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -38,6 +40,9 @@ export const SignUpForm = () => {
       if (!lastName.length) {
         return alert('Введіть прізвище')
       }
+      if (!group.length) {
+        return alert('Введіть групу')
+      }
       if (!password.length) {
         return alert('Введіть пароль')
       }
@@ -50,6 +55,7 @@ export const SignUpForm = () => {
         {
           first_name: firstName,
           last_name: lastName,
+          group,
           email,
           password,
           role,
@@ -85,6 +91,10 @@ export const SignUpForm = () => {
             value={lastName}
             onChange={handleLastNameChange}
           />
+        </div>
+        <div className={formStyles.inputContainer}>
+          <label htmlFor="group">Група</label>
+          <TextInput id="group" value={group} onChange={handleGroupChange} />
         </div>
         <div className={formStyles.inputContainer}>
           <label htmlFor="password">Пароль</label>

@@ -7,6 +7,7 @@ interface AuthContext {
   logout: () => void
   token: string | null
   user: User | null
+  isStorageChecked: boolean
 }
 
 export const AuthContext = createContext<AuthContext>({
@@ -15,4 +16,5 @@ export const AuthContext = createContext<AuthContext>({
   logout: () => {},
   token: null,
   user: null,
+  isStorageChecked: false,
 })

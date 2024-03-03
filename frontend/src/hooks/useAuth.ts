@@ -5,6 +5,7 @@ import { User } from '../types'
 export const ACCESS_TOKEN_KEY = 'access_token'
 
 export const useAuth = () => {
+  const [isStorageChecked, setStorageChecked] = useState(false)
   const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [isSignedIn, setSignedIn] = useState(false)
@@ -13,6 +14,7 @@ export const useAuth = () => {
     const token = localStorage.getItem(ACCESS_TOKEN_KEY)
     setToken(token)
     setSignedIn(!!token)
+    setStorageChecked(true)
   }, [])
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export const useAuth = () => {
 
   const login = async (token: string) => {
     localStorage.setItem(ACCESS_TOKEN_KEY, token)
+    setToken(token)
     setSignedIn(true)
   }
 
@@ -52,5 +55,5 @@ export const useAuth = () => {
     }
   }
 
-  return { user, token, isSignedIn, login, logout }
+  return { user, token, isSignedIn, isStorageChecked, login, logout }
 }

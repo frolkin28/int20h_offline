@@ -1,15 +1,13 @@
 .linkLogo {
-  display: block;
-  position: absolute;
-  top: 0;
-  align-items: center;
   text-decoration: none;
 }
 
-.logo{
+.logo {
+  margin-top: 0;
+  margin-bottom: 30px;
   background-clip: text;
   background: linear-gradient(180deg, rgba(0, 41, 255, 0.99) 0%, #ffd600 100%);
-  font-family: "Lohit Tamil", sans-serif;
+  font-family: 'Lohit Tamil', sans-serif;
   font-size: 40px;
   font-weight: bold;
   -webkit-background-clip: text;
@@ -31,4 +29,7 @@ li {
   width: 200px;
   background: #e4e4e4;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { NavbarLayout } from './layouts'
-import { HomePage } from './pages'
+import { HomePage, SubjectsPage, GroupsPage, CreateGroupPage } from './pages'
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +10,22 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <HomePage />,
+      },
+      {
+        path: '/groups',
+        element: <GroupsPage />,
+      },
+      {
+        path: '/groups/create',
+        element: <CreateGroupPage />,
+      },
+      {
+        path: '/subjects',
+        element: <SubjectsPage />,
+      },
+      {
+        path: '/subjects/create',
         element: <HomePage />,
       },
     ],

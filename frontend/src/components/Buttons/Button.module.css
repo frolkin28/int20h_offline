@@ -1,4 +1,4 @@
-.my-button {
+.button {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -9,11 +9,24 @@
   color: #fff;
 }
 
-.my-button:hover {
+.button:hover {
   background-color: #6c059b;
 }
 
-.my-button:disabled {
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.buttonSecondary {
+  background-color: #ff6a00;
+}
+
+.buttonSecondary:hover {
+  background-color: #bb550d;
+}
+
+.buttonSecondary:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
