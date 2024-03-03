@@ -69,7 +69,7 @@ def get_activites(subject_id: int) -> list:
     for active in activites:
         active_dict = {
             "active_id": active.id,
-            "type": active.active,
+            "type": active.type,
             "date": active.date.strftime("%Y-%m-%d %H:%M:%S"),
         }
         data.append(active_dict)

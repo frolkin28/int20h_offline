@@ -102,10 +102,11 @@ def send_email(student_id: int, mark: str, activity_id: int) -> None:
             subject=theme,
             body=body,
             sender=current_app.config["MAIL_USERNAME"],
-            recipients=person.email,
+            recipients=[person.email],
         )
 
         with current_app.app_context():
             mail.send(message)
-    except:
+    except Exception as e:
+        print(e)
         return None

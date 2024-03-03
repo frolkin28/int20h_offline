@@ -38,10 +38,9 @@ def create_app() -> Flask:
 
     db.init_app(app)
     migrate.init_app(app, db)
-    mail.init_app(app)
-
 
     configure_mail_service(app)
+    mail.init_app(app)
 
     jwt.init_app(app)
 
