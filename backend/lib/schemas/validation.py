@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 
-from backend.models import Role, Active_type
+from backend.models import Role, Active_type, Mail_template
 
 
 class SignUpSchema(Schema):
