@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import styles from './Navbar.module.css'
 import { AuthContext } from '../../AuthContext'
 import { UserRole } from '../../types'
+import { link } from 'fs'
 
 export const Navbar = () => {
   const { user } = useContext(AuthContext)
@@ -38,6 +39,9 @@ export const Navbar = () => {
 
   return (
     <div className={styles.container}>
+       <RouterLink to="/" className={styles.linkLogo}>
+          <p className={styles.logo}>campus</p>
+        </RouterLink>
       <ul>{links}</ul>
     </div>
   )
