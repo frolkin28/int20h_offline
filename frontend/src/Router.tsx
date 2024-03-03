@@ -8,6 +8,7 @@ import {
   CreateSubjectPage,
   Subject,
   Activity,
+  Account,
 } from './pages'
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: '/activity/:id',
         element: <Activity />,
+      },
+      {
+        path: '/account',
+        element: <Account />,
       },
     ],
   },
