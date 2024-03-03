@@ -50,6 +50,7 @@ class Subject(db.Model):
     name = db.Column(db.String(128))
     teacher_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     group_id = db.Column(db.Integer, db.ForeignKey("group.id"))
+    group = db.relationship("Group", lazy=True)
 
 
 class Activity(db.Model):

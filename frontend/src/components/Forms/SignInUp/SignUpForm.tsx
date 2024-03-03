@@ -40,7 +40,7 @@ export const SignUpForm = () => {
       if (!lastName.length) {
         return alert('Введіть прізвище')
       }
-      if (!group.length) {
+      if (role === UserRole.Student && !group.length) {
         return alert('Введіть групу')
       }
       if (!password.length) {
@@ -92,28 +92,6 @@ export const SignUpForm = () => {
             onChange={handleLastNameChange}
           />
         </div>
-        <div className={formStyles.inputContainer}>
-          <label htmlFor="group">Група</label>
-          <TextInput id="group" value={group} onChange={handleGroupChange} />
-        </div>
-        <div className={formStyles.inputContainer}>
-          <label htmlFor="password">Пароль</label>
-          <TextInput
-            id="password"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <div className={formStyles.inputContainer}>
-          <label htmlFor="password-repeat">Повторіть пароль</label>
-          <TextInput
-            id="password-repeat"
-            type="password"
-            value={passwordRepeat}
-            onChange={handlePasswordRepeatChange}
-          />
-        </div>
         <div className={styles.radioButtonContainer}>
           <label>
             <input
@@ -133,6 +111,30 @@ export const SignUpForm = () => {
             />
             Я викладач
           </label>
+        </div>
+        {role === UserRole.Student ? (
+          <div className={formStyles.inputContainer}>
+            <label htmlFor="group">Група</label>
+            <TextInput id="group" value={group} onChange={handleGroupChange} />
+          </div>
+        ) : null}
+        <div className={formStyles.inputContainer}>
+          <label htmlFor="password">Пароль</label>
+          <TextInput
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <div className={formStyles.inputContainer}>
+          <label htmlFor="password-repeat">Повторіть пароль</label>
+          <TextInput
+            id="password-repeat"
+            type="password"
+            value={passwordRepeat}
+            onChange={handlePasswordRepeatChange}
+          />
         </div>
       </div>
       <Button

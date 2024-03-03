@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState, ChangeEvent } from 'react'
-import { Button } from '../../components'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Groups.module.css'
-import { Group, Student } from '../../types'
+import { Group, Student, UserRole } from '../../types'
 import axios from 'axios'
 import { AuthContext } from '../../AuthContext'
+import { Button } from '../../components'
 
-const sortAlpabetically = (students: Student[]) => {
+const sortAlphabetically = (students: Student[]) => {
   return students.sort((a, b) => {
     const lastNameA = a.last_name.toUpperCase()
     const lastNameB = b.last_name.toUpperCase()
@@ -24,7 +24,7 @@ const sortAlpabetically = (students: Student[]) => {
 export const GroupsPage = () => {
   const navigate = useNavigate()
 
-  const { token } = useContext(AuthContext)
+  const { token, user } = useContext(AuthContext)
 
   const [groups, setGroups] = useState<Group[]>([])
   const [students, setStudents] = useState<Student[]>([])
@@ -45,7 +45,6 @@ export const GroupsPage = () => {
 
   const handleGroupSelect = async (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.target.value.length) {
-      console.log('ID: ', event.target.value)
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/api/students?group=${event.target.value}`,
         {
@@ -54,7 +53,7 @@ export const GroupsPage = () => {
           },
         }
       )
-      setStudents(sortAlpabetically(response.data.data))
+      setStudents(sortAlphabetically(response.data.data))
     }
   }
 
@@ -87,11 +86,13 @@ export const GroupsPage = () => {
   return (
     <div className={styles.container}>
       {groupSelect}
-      <Button
-        text="Створити групу"
-        secondary={true}
-        onClick={() => navigate('/groups/create')}
-      />
+      {user?.role === UserRole.Teacher ? (
+        <Button
+          text="Створити групу"
+          secondary={true}
+          onClick={() => navigate('/groups/create')}
+        />
+      ) : null}
       {students.length ? table : null}
     </div>
   )
