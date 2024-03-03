@@ -4,15 +4,13 @@ from backend.utils import error_response, success_response
 
 from flask import Blueprint, request
 from marshmallow import ValidationError
-from flask_jwt_extended import current_user
+from flask_jwt_extended import current_user, jwt_required
 
 from backend.lib.schemas import CreateSubjectSchema
 
-from backend.models import User, Role
-from backend.types import CreateSubjectPayload
+from backend.models import Role
 
 from backend.lib.journal import create_subject, take_subject_list, get_activites
-
 
 
 bp = Blueprint("journal", __name__, url_prefix="/api/journal")
@@ -66,7 +64,7 @@ def add_subject():
 
 
 @bp.route("/", methods=("GET",))
-@permissions([Role.TEACHER])
+@jwt_required()
 def my_subjects():
     """
     ---
@@ -86,15 +84,12 @@ def my_subjects():
         tags:
         - journal
     """
-    user_id: int = current_user.id
-
     try:
-        subjects_list = take_subject_list(user_id)
+        subjects_list = take_subject_list(current_user)
     except ValidationError as e:
         return error_response(status_code=400, errors=e.messages)
 
     return success_response(data={"subject_list": subjects_list})
-
 
 
 # FOR ALL ROLES
@@ -103,8 +98,8 @@ def subject_activity(id):
     """
     ---
     get:
-        summary: Список завдань по конкретному предмету  
-        responses: 
+        summary: Список завдань по конкретному предмету
+        responses:
             '200':
                 content:
                     application/json:
