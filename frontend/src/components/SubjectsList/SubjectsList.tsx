@@ -2,16 +2,15 @@ import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
-import { Subject } from '../../types'
+import { Subject, UserRole } from '../../types'
 import { SubjectCard } from '../SubjectCard/SubjectCard'
-import styles from './Subjects.module.css'
-import { Link } from 'react-router-dom'
-import { Button } from '../'
+import styles from './SubjectsList.module.css'
+import { Button } from '..'
 
-export const SubjectsTeacher = () => {
+export const SubjectsList = () => {
   const navigate = useNavigate()
 
-  const { token } = useContext(AuthContext)
+  const { token, user } = useContext(AuthContext)
 
   const [subjects, setSubjects] = useState<Subject[]>()
 
@@ -43,11 +42,14 @@ export const SubjectsTeacher = () => {
 
   return (
     <div>
-      <Button
-        text="Створити предмет"
-        secondary={true}
-        onClick={() => navigate('/subjects/create')}
-      />
+      {user?.role == UserRole.Teacher && (
+        <Button
+          text="Створити предмет"
+          secondary={true}
+          onClick={() => navigate('/subjects/create')}
+        />
+      )}
+
       <div className={styles.subjectsWrapper}>{renderedSubjects}</div>
     </div>
   )

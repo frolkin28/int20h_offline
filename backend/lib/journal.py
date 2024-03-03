@@ -6,7 +6,7 @@ from sqlalchemy import desc
 
 from werkzeug.datastructures import FileStorage
 
-from backend.models import Group, Subject, User, Activity, Attendance
+from backend.models import Group, Role, Subject, User, Activity, Attendance
 from backend.types import CreateSubjectPayload, t
 from backend.services.db import db
 
@@ -47,11 +47,17 @@ def create_subject(payload: CreateSubjectPayload, user_id: int) -> int:
     return subject.id
 
 
-def take_subject_list(user_id: int) -> list:
-    subjects = Subject.query.filter(Subject.teacher_id == user_id).all()
+def take_subject_list(user: User) -> list:
     data = []
 
-    for subject in subjects:
+    if user.role == Role.STUDENT:
+        subjects_query = Subject.query.filter(Subject.group_id == user.group_id)
+    elif user.role == Role.TEACHER:
+        subjects_query = Subject.query.filter(Subject.teacher_id == user.id)
+    else:
+        return []
+
+    for subject in subjects_query.all():
         subject_dict = {
             "subject_id": subject.id,
             "subject_name": subject.name,

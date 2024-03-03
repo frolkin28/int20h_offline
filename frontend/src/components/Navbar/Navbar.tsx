@@ -15,10 +15,10 @@ export const Navbar = () => {
           <RouterLink to={'/account'}>Аккаунт</RouterLink>
         </li>
         <li>
-          <RouterLink to={'/mock'}>Групи</RouterLink>
+          <RouterLink to={'/groups'}>Групи</RouterLink>
         </li>
         <li>
-          <RouterLink to={'/mock'}>Мої предмети</RouterLink>
+          <RouterLink to={'/subjects'}>Мої предмети</RouterLink>
         </li>
       </>
     )

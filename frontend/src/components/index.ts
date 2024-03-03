@@ -1,8 +1,7 @@
 export { Navbar } from './Navbar/Navbar'
 export { Button } from './Buttons/Button'
 export { Welcome } from './Welcome/Welcome'
-export { SubjectsTeacher } from './Subjects/SubjectsTeacher'
-export { SubjectsStudent } from './Subjects/SubjectsStudent'
+export { SubjectsList } from './SubjectsList/SubjectsList'
 export { SubjectCard } from './SubjectCard/SubjectCard'
 
 // Inputs

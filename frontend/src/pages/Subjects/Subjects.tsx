@@ -1,8 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../AuthContext'
-import { UserRole, Subject } from '../../types'
-import { SubjectsTeacher, SubjectsStudent } from '../../components'
+import { SubjectsList } from '../../components'
 
 export const SubjectsPage = () => {
   const navigate = useNavigate()
@@ -15,12 +14,5 @@ export const SubjectsPage = () => {
     }
   }, [isSignedIn, isStorageChecked])
 
-  if (user?.role === UserRole.Teacher) {
-    return <SubjectsTeacher />
-  }
-  if (user?.role === UserRole.Student) {
-    return <SubjectsStudent />
-  }
-
-  return null
+  return <SubjectsList />
 }
