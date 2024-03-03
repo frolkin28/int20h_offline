@@ -94,6 +94,7 @@ def get_apispec(app: Flask) -> APISpec:
     spec.components.schema("EditAttendanceSchema", schema=EditAttendanceSchema)
 
 
+
     create_tags(spec)
 
     load_docstrings(spec, app)
