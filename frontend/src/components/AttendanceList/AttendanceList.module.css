@@ -1,0 +1,15 @@
+.activityTitle {
+    text-align: center;
+}
+
+.sectionContainer {
+    margin: 20px;
+}
+
+.attendanceList {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

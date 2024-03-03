@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Activity } from '../../types'
+import { ActivityItem } from '../../types'
 import { useEffect, useState } from 'react'
 import styles from './ActivitiesList.module.css'
 
@@ -9,7 +9,7 @@ interface ActivitiesListProps {
 }
 
 export const ActivitiesList = ({ subjectId }: ActivitiesListProps) => {
-  const [activities, setActivities] = useState<Activity[]>([])
+  const [activities, setActivities] = useState<ActivityItem[]>([])
 
   useEffect(() => {
     ;(async () => {
