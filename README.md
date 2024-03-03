@@ -1,4 +1,4 @@
-# INT20H 2024 offline
+# INT20H 2024 offline (Ча-ча)
 
 **Try it online:** `<some url>` 🚀
 
