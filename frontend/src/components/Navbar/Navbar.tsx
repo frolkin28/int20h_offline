@@ -38,6 +38,9 @@ export const Navbar = () => {
         <li>
           <RouterLink to={'/subjects'}>Рейтинг</RouterLink>
         </li>
+        <li>
+          <RouterLink to={'/newsletter'}>Створити розсилку</RouterLink>
+        </li>
       </>
     )
   }
